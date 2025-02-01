@@ -1,0 +1,66 @@
+# Dependencies
+node_modules
+.pnp
+.pnp.js
+
+# Build outputs
+dist
+build
+*.tsbuildinfo
+
+# Testing
+coverage
+.nyc_output
+
+# Environment variables
+.env
+.env.local
+.env.*.local
+
+# IDE
+.idea
+.vscode/*
+!.vscode/extensions.json
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Logs
+logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# Cache
+.cache
+.eslintcache
+.stylelintcache
+*.swp
+*.swo
+
+# Temporary files
+tmp
+temp
+*.tmp
+*.temp
+
+# Docker
+.docker
+
+# MongoDB
+data
+mongodb
+
+# Redis
+dump.rdb
+
+# Misc
+.turbo
+.vercel
+.next token.txt

@@ -1,0 +1,40 @@
+{
+  "name": "@justmaily/maily-deliver",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "eslint .",
+    "test": "vitest",
+    "test:ci": "vitest --ci --coverage",
+    "lint:ci": "eslint . --ext .ts,.tsx --quiet --max-warnings 0",
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@justmaily/pg-audit": "workspace:*",
+    "@justmaily/temporal-core": "workspace:*",
+    "@microsoft/microsoft-graph-client": "^3.0.7",
+    "@octokit/rest": "^19.0.13",
+    "@sendgrid/client": "^8.1.0",
+    "@sendgrid/mail": "^8.1.0",
+    "@supabase/supabase-js": "^2.39.3",
+    "@upstash/ratelimit": "^1.0.0",
+    "@upstash/redis": "^1.28.3",
+    "awilix": "^8.0.1",
+    "google-auth-library": "^9.6.3",
+    "handlebars": "^4.7.8",
+    "html-minifier": "^4.0.0",
+    "ioredis": "^5.3.2",
+    "juice": "^9.1.0",
+    "keycloak-connect": "^22.0.5",
+    "mjml": "^4.14.1",
+    "next": "^14.1.0",
+    "pino": "^8.17.2",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "zod": "^3.22.4"
+  },
+  "devDependencies": {}
+}

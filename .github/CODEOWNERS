@@ -1,0 +1,30 @@
+# Global owners
+* @maily-admin
+
+# Apps directory owners
+/apps/api-gateway/ @maily-backend-leads
+/apps/ai-orchestration/ @maily-ai-leads
+/apps/content-generation/ @maily-ai-leads
+/apps/personalization/ @maily-ai-leads
+/apps/audience-segmentation/ @maily-data-leads
+/apps/campaign-management/ @maily-backend-leads
+/apps/analytics-service/ @maily-data-leads
+/apps/compliance-security/ @maily-security-leads
+/apps/attachment-service/ @maily-backend-leads
+/apps/web-client/ @maily-frontend-leads
+/apps/notification-service/ @maily-backend-leads
+/apps/real-time-collaboration/ @maily-backend-leads
+
+# Libs directory owners
+/libs/ai-frameworks/ @maily-ai-team
+/libs/shared-types/ @maily-core-team
+/libs/auth-utils/ @maily-security-leads
+/libs/compliance-tools/ @maily-security-leads
+/libs/analytics/ @maily-data-leads
+
+# Config directory owners
+/config/ @maily-devops-leads
+
+# Infrastructure and DevOps
+/infrastructure/ @maily-devops-leads
+/.github/workflows/ @maily-devops-leads 

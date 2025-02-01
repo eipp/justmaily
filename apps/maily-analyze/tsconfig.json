@@ -1,0 +1,17 @@
+{
+  "compilerOptions": {
+    "target": "ES2021",
+    "module": "ESNext",
+    "esModuleInterop": true,
+    "forceConsistentCasingInFileNames": true,
+    "strict": true,
+    "outDir": "dist",
+    "baseUrl": "src",
+    "paths": {
+      "*": ["./*"]
+    },
+    "types": ["node", "jest"]
+  },
+  "include": ["src/**/*", "src/tests/**/*"],
+  "exclude": ["node_modules", "dist"]
+}

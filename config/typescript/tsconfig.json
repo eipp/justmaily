@@ -1,0 +1,21 @@
+{
+  "extends": "./tsconfig.base.json",
+  "compilerOptions": {
+    "baseUrl": ".",
+    "paths": {
+      "@maily/*": ["libs/*/src"],
+      "@maily/core/*": ["apps/maily-core/*/src"],
+      "@maily/support/*": ["apps/maily-support/*/src"],
+      "@apps/web/*": ["apps/web/*/src"],
+      "@apps/security/*": ["apps/compliance-security/*/src"]
+    }
+  },
+  "include": [
+    "apps/maily-core/*/src",
+    "apps/maily-support/*/src",
+    "apps/web/*/src",
+    "apps/compliance-security/*/src",
+    "libs/*/src"
+  ],
+  "exclude": ["node_modules", "dist", "build", "coverage"]
+} 

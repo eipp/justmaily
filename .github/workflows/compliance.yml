@@ -1,0 +1,137 @@
+name: Reusable Compliance Service Workflow
+
+on:
+  workflow_call:
+    inputs:
+      service-path:
+        required: true
+        type: string
+        description: "Path to the service directory"
+    secrets:
+      AWS_ACCESS_KEY_ID:
+        required: false
+      AWS_SECRET_ACCESS_KEY:
+        required: false
+      AWS_REGION:
+        required: false
+      ECS_CLUSTER:
+        required: false
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    services:
+      mongodb:
+        image: mongo:4.4
+        ports:
+          - 27017:27017
+      redis:
+        image: redis:6
+        ports:
+          - 6379:6379
+      vault:
+        image: vault:1.9.0
+        ports:
+          - 8200:8200
+        env:
+          VAULT_DEV_ROOT_TOKEN_ID: dev-token
+          VAULT_DEV_LISTEN_ADDRESS: 0.0.0.0:8200
+
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '18'
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci
+        working-directory: ${{ inputs.service-path }}
+
+      - name: Run linter
+        run: npm run lint
+        working-directory: ${{ inputs.service-path }}
+
+      - name: Run tests
+        run: npm test
+        working-directory: ${{ inputs.service-path }}
+        env:
+          MONGODB_URI: mongodb://localhost:27017/test
+          REDIS_HOST: localhost
+          REDIS_PORT: 6379
+          VAULT_URL: http://localhost:8200
+          VAULT_TOKEN: dev-token
+          JWT_SECRET: test-secret
+          CORS_ORIGINS: http://localhost:3000
+
+      - name: Run integration tests
+        run: npm run test:integration
+        working-directory: ${{ inputs.service-path }}
+        env:
+          MONGODB_URI: mongodb://localhost:27017/test
+          REDIS_HOST: localhost
+          REDIS_PORT: 6379
+          VAULT_URL: http://localhost:8200
+          VAULT_TOKEN: dev-token
+          JWT_SECRET: test-secret
+          CORS_ORIGINS: http://localhost:3000
+
+  build:
+    needs: test
+    runs-on: ubuntu-latest
+    if: github.ref == 'refs/heads/main'
+
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v2
+
+      - name: Login to GitHub Container Registry
+        uses: docker/login-action@v2
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Build and push
+        uses: docker/build-push-action@v4
+        with:
+          context: ${{ inputs.service-path }}
+          push: true
+          tags: |
+            ghcr.io/${{ github.repository }}/compliance-security:latest
+            ghcr.io/${{ github.repository }}/compliance-security:${{ github.sha }}
+          cache-from: type=gha
+          cache-to: type=gha,mode=max
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    if: github.ref == 'refs/heads/main'
+    environment: production
+
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Configure AWS credentials
+        uses: aws-actions/configure-aws-credentials@v2
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: ${{ secrets.AWS_REGION }}
+
+      - name: Update ECS service
+        run: |
+          aws ecs update-service \
+            --cluster ${{ secrets.ECS_CLUSTER }} \
+            --service compliance-security \
+            --force-new-deployment
+
+      - name: Wait for deployment
+        run: |
+          aws ecs wait services-stable \
+            --cluster ${{ secrets.ECS_CLUSTER }} \
+            --services compliance-security 

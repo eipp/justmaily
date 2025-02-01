@@ -1,0 +1,274 @@
+openapi: 3.1.0
+info:
+  title: AI Content Generation API
+  version: '1.0.0'
+  description: |
+    API for generating email content and subject lines using advanced AI models.
+    Supports multiple AI providers with automatic fallback and load balancing.
+  contact:
+    name: API Support
+    email: support@example.com
+  license:
+    name: MIT
+    url: https://opensource.org/licenses/MIT
+
+servers:
+  - url: https://api.example.com/v1
+    description: Production server
+  - url: https://staging-api.example.com/v1
+    description: Staging server
+
+security:
+  - ApiKeyAuth: []
+
+paths:
+  /generate/email:
+    post:
+      summary: Generate email content
+      description: Generate email content based on a brief and specified options
+      operationId: generateEmail
+      tags:
+        - Content Generation
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/EmailGenerationRequest'
+      responses:
+        '200':
+          description: Successfully generated email content
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EmailGenerationResponse'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '429':
+          $ref: '#/components/responses/TooManyRequests'
+        '500':
+          $ref: '#/components/responses/InternalError'
+
+  /generate/subjects:
+    post:
+      summary: Generate email subject lines
+      description: Generate multiple A/B test variants for email subject lines
+      operationId: generateSubjects
+      tags:
+        - Content Generation
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SubjectGenerationRequest'
+      responses:
+        '200':
+          description: Successfully generated subject lines
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SubjectGenerationResponse'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '429':
+          $ref: '#/components/responses/TooManyRequests'
+        '500':
+          $ref: '#/components/responses/InternalError'
+
+  /metrics:
+    get:
+      summary: Get service metrics
+      description: Retrieve Prometheus metrics for monitoring
+      operationId: getMetrics
+      tags:
+        - Monitoring
+      security:
+        - AdminAuth: []
+      responses:
+        '200':
+          description: Prometheus metrics in text format
+          content:
+            text/plain:
+              schema:
+                type: string
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+
+components:
+  securitySchemes:
+    ApiKeyAuth:
+      type: apiKey
+      in: header
+      name: X-API-Key
+    AdminAuth:
+      type: apiKey
+      in: header
+      name: X-Admin-Key
+
+  schemas:
+    EmailGenerationRequest:
+      type: object
+      required:
+        - brief
+      properties:
+        brief:
+          type: string
+          description: Brief description of the email content to generate
+          example: Write a professional email about project updates
+        options:
+          type: object
+          properties:
+            tone:
+              type: string
+              enum: [professional, friendly, formal, casual]
+              description: Desired tone of the email
+              default: professional
+            length:
+              type: string
+              enum: [short, medium, long]
+              description: Desired length of the email
+              default: medium
+
+    EmailGenerationResponse:
+      type: object
+      required:
+        - data
+        - usage
+      properties:
+        data:
+          type: string
+          description: Generated email content
+        usage:
+          $ref: '#/components/schemas/Usage'
+        cached:
+          type: boolean
+          description: Whether the response was served from cache
+
+    SubjectGenerationRequest:
+      type: object
+      required:
+        - emailContent
+      properties:
+        emailContent:
+          type: string
+          description: Email content to generate subject lines for
+        options:
+          type: object
+          properties:
+            maxLength:
+              type: integer
+              minimum: 20
+              maximum: 100
+              default: 50
+              description: Maximum length of subject lines
+            abTestVariants:
+              type: integer
+              minimum: 1
+              maximum: 5
+              default: 3
+              description: Number of A/B test variants to generate
+
+    SubjectGenerationResponse:
+      type: object
+      required:
+        - data
+        - usage
+      properties:
+        data:
+          type: array
+          items:
+            type: string
+          description: Generated subject line variants
+        usage:
+          $ref: '#/components/schemas/Usage'
+        cached:
+          type: boolean
+          description: Whether the response was served from cache
+
+    Usage:
+      type: object
+      required:
+        - promptTokens
+        - completionTokens
+        - totalTokens
+        - latencyMs
+        - timestamp
+        - success
+      properties:
+        promptTokens:
+          type: integer
+          description: Number of tokens in the prompt
+        completionTokens:
+          type: integer
+          description: Number of tokens in the completion
+        totalTokens:
+          type: integer
+          description: Total number of tokens used
+        latencyMs:
+          type: number
+          description: Request latency in milliseconds
+        timestamp:
+          type: string
+          format: date-time
+          description: Timestamp of the request
+        success:
+          type: boolean
+          description: Whether the request was successful
+        errorType:
+          type: string
+          description: Type of error if the request failed
+
+    Error:
+      type: object
+      required:
+        - error
+        - message
+      properties:
+        error:
+          type: string
+          description: Error type
+        message:
+          type: string
+          description: Error message
+        details:
+          type: object
+          description: Additional error details
+
+  responses:
+    BadRequest:
+      description: Invalid request parameters
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+
+    Unauthorized:
+      description: Authentication failed
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+
+    TooManyRequests:
+      description: Rate limit exceeded
+      headers:
+        Retry-After:
+          schema:
+            type: integer
+          description: Number of seconds to wait before retrying
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+
+    InternalError:
+      description: Internal server error
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error' 

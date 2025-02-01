@@ -1,0 +1,35 @@
+{
+    "Version": "2012-10-17",
+    "Statement": [
+        {
+            "Effect": "Allow",
+            "Action": [
+                "ses:*",
+                "cloudwatch:PutMetricData",
+                "cloudwatch:GetMetricData",
+                "cloudwatch:PutMetricAlarm",
+                "sns:CreateTopic",
+                "sns:Subscribe",
+                "sns:Publish"
+            ],
+            "Resource": "*"
+        },
+        {
+            "Effect": "Allow",
+            "Action": [
+                "ses:SendEmail",
+                "ses:SendRawEmail"
+            ],
+            "Resource": "arn:aws:ses:*:288761728065:*"
+        },
+        {
+            "Effect": "Allow",
+            "Action": [
+                "ses:GetSendQuota",
+                "ses:GetSendStatistics",
+                "ses:GetAccountSendingEnabled"
+            ],
+            "Resource": "*"
+        }
+    ]
+} 
