@@ -1,5 +1,5 @@
 import { createContext, useContext, useEffect, useState } from 'react'
-import { createBrowserClient } from '@/lib/supabase-ssr'
+import createBrowserClient from '@/lib/supabase-ssr'
 import { useRouter } from 'next/navigation'
 import { Database } from '@/types/supabase'
 import { User } from '@supabase/supabase-js'

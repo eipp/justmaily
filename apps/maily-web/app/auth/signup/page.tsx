@@ -5,8 +5,7 @@ import { useRouter } from 'next/navigation'
 import { useSupabase } from '@/lib/providers/supabase'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
-import GithubIcon from 'lucide-react/icons/github'
-import GoogleIcon from 'lucide-react/icons/google'
+import { GitHub, Google } from 'lucide-react'
 import { cn } from '@/lib/utils'
 
 export default function SignUp() {
@@ -165,7 +164,7 @@ export default function SignUp() {
                 isLoading && 'cursor-not-allowed opacity-50'
               )}
             >
-              <GithubIcon className="mr-2 h-4 w-4" />
+              <GitHub className="mr-2 h-4 w-4" />
               GitHub
             </Button>
             <Button
@@ -178,7 +177,7 @@ export default function SignUp() {
                 isLoading && 'cursor-not-allowed opacity-50'
               )}
             >
-              <GoogleIcon className="mr-2 h-4 w-4" />
+              <Google className="mr-2 h-4 w-4" />
               Google
             </Button>
           </div>
