@@ -17,4 +17,6 @@ const Textarea: React.FC<TextareaProps> = (props) => {
   );
 };
 
-export default Textarea; 
+export default Textarea;
+
+export { default, Textarea } from './atoms/textarea'; 

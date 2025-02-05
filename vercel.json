@@ -1,7 +1,11 @@
 {
   "version": 2,
   "builds": [
-    { "src": "apps/maily-web/package.json", "use": "@vercel/next" }
+    {
+      "src": "apps/maily-web/package.json",
+      "use": "@vercel/next",
+      "config": { "rootDirectory": "apps/maily-web" }
+    }
   ],
   "routes": [
     { "src": "/(.*)", "dest": "/apps/maily-web/$1" }
