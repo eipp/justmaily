@@ -1,9 +1,12 @@
-import { ChatInterface } from "@/components/chat/chat-interface";
+import React from 'react';
 
-export default function Home() {
+const HomePage: React.FC = () => {
   return (
-    <main className="flex min-h-screen flex-col">
-      <ChatInterface />
-    </main>
+    <div style={{ padding: '2rem', textAlign: 'center' }}>
+      <h1>Welcome to Maily</h1>
+      <p>Your dynamic, AI-powered email marketing platform is live!</p>
+    </div>
   );
-}
+};
+
+export default HomePage;

@@ -12,9 +12,7 @@ const nextConfig = {
       'platform-lookaside.fbsbx.com'
     ]
   },
-  experimental: {
-    serverActions: true
-  },
+  experimental: {},
   headers: async () => [
     {
       source: '/:path*',
