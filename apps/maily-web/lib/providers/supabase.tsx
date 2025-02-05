@@ -1,5 +1,5 @@
 import { createContext, useContext, useEffect, useState } from 'react'
-import { createBrowserClient } from '@supabase/ssr'
+import { createBrowserClient } from '@/lib/supabase-ssr'
 import { useRouter } from 'next/navigation'
 import { Database } from '@/types/supabase'
 import { User } from '@supabase/supabase-js'
@@ -60,7 +60,7 @@ export function SupabaseProvider({ children }: { children: React.ReactNode }) {
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState<AuthError | null>(null)
   const router = useRouter()
-  const metrics = new MetricsService()
+  const metrics = MetricsService
   const security = new SecurityService()
 
   useEffect(() => {
@@ -411,4 +411,6 @@ export function useSession() {
   }, [supabase])
 
   return { session, loading }
-} 
+}
+
+export default createBrowserClient; 

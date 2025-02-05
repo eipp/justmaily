@@ -1,7 +1,8 @@
 'use client'
 
+import React from 'react'
 import { useQuery } from '@tanstack/react-query'
-import { api } from '@/lib/api/client'
+import { apiClient } from '@/lib/api/client'
 import {
   Card,
   CardContent,
@@ -147,15 +148,15 @@ const columns: ColumnDef<Campaign>[] = [
   },
 ]
 
-export default function CampaignAnalyticsPage() {
+const CampaignAnalyticsPage: React.FC = () => {
   const { data: campaigns, isLoading: isLoadingCampaigns } = useQuery({
     queryKey: ['analytics-campaigns-detailed'],
-    queryFn: () => api.analytics.getCampaignsDetailed(),
+    queryFn: () => apiClient.analytics.getCampaignsDetailed(),
   })
 
   const { data: performance, isLoading: isLoadingPerformance } = useQuery({
     queryKey: ['analytics-campaigns-performance'],
-    queryFn: () => api.analytics.getCampaignsPerformance(),
+    queryFn: () => apiClient.analytics.getCampaignsPerformance(),
   })
 
   return (
@@ -219,7 +220,7 @@ export default function CampaignAnalyticsPage() {
                 options: [
                   { label: 'Above 30%', value: 'above-30' },
                   { label: '20-30%', value: '20-30' },
-                  { label: 'Below 20%', value: 'below-20' },
+                  { label: 'Below 30%', value: 'below-30' },
                 ],
               },
               {
@@ -237,4 +238,6 @@ export default function CampaignAnalyticsPage() {
       </div>
     </div>
   )
-} 
+}
+
+export default CampaignAnalyticsPage 

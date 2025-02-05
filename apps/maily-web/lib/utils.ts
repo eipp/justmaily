@@ -34,4 +34,6 @@ export function formatDate(date: string | undefined): string {
     dateStyle: 'medium',
     timeStyle: 'short',
   }).format(new Date(date))
-} 
+}
+
+export const cn = (...classes: string[]) => classes.filter(Boolean).join(' '); 

@@ -1,0 +1,13 @@
+{
+  "compilerOptions": {
+    "baseUrl": ".",
+    "paths": {
+      "@/*": ["*"],
+      "@/lib/*": ["lib/*"],
+      "@/components/*": ["components/*"],
+      "@supabase/ssr": ["lib/supabase-ssr/index.js"],
+      "@vercel/speed-insights/next": ["lib/vercel-speed-insights-placeholder.js"]
+    }
+  },
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx"]
+} 

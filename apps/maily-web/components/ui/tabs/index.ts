@@ -1,0 +1,1 @@
+export { default as Tabs, TabsList, TabsTrigger, TabsContent } from '../atoms/tabs'; 
