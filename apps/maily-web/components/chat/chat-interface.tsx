@@ -8,4 +8,5 @@ const ChatInterface: React.FC = () => {
   );
 };
 
-export default ChatInterface; 
+export default ChatInterface;
+export { ChatInterface }; 

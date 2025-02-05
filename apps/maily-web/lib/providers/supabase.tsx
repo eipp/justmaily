@@ -61,7 +61,7 @@ export function SupabaseProvider({ children }: { children: React.ReactNode }) {
   const [error, setError] = useState<AuthError | null>(null)
   const router = useRouter()
   const metrics = MetricsService
-  const security = new SecurityService()
+  const security = SecurityService
 
   useEffect(() => {
     const startTime = Date.now()

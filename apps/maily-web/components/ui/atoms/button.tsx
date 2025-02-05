@@ -5,4 +5,4 @@ export const Button = (props: React.ButtonHTMLAttributes<HTMLButtonElement>) => 
 };
 
 export default Button;
-export { Button }; 
+// export { Button }; 

@@ -5,7 +5,8 @@ import { useRouter } from 'next/navigation'
 import { useSupabase } from '@/lib/providers/supabase'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
-import { GithubIcon, GoogleIcon } from 'lucide-react'
+import GithubIcon from 'lucide-react/icons/github'
+import GoogleIcon from 'lucide-react/icons/google'
 import { cn } from '@/lib/utils'
 
 export default function SignUp() {

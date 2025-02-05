@@ -12,5 +12,4 @@ export const createBrowserClient = () => {
   };
 };
 
-// Adding default export to support both named and default imports
 export default createBrowserClient; 

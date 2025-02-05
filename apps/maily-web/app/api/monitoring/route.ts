@@ -5,8 +5,8 @@ import { SecurityService } from '@/lib/security'
 import { db, cache, search } from '@/lib/db'
 import { z } from 'zod'
 
-const metrics = new MetricsService()
-const security = new SecurityService()
+const metrics = MetricsService as any;
+const security = SecurityService;
 
 // API Metrics Handler
 export const GET = createAPIHandler({
@@ -65,7 +65,7 @@ async function getApiMetrics() {
       requestVolume,
     }
   } catch (error) {
-    metrics.recordError('monitoring_api_metrics_error', error.message)
+    metrics.recordError('monitoring_api_metrics_error', error instanceof Error ? error.message : String(error))
     throw error
   }
 }
@@ -90,7 +90,7 @@ async function getDbMetrics() {
       transactions,
     }
   } catch (error) {
-    metrics.recordError('monitoring_db_metrics_error', error.message)
+    metrics.recordError('monitoring_db_metrics_error', error instanceof Error ? error.message : String(error))
     throw error
   }
 }
@@ -115,7 +115,7 @@ async function getCacheMetrics() {
       evictions,
     }
   } catch (error) {
-    metrics.recordError('monitoring_cache_metrics_error', error.message)
+    metrics.recordError('monitoring_cache_metrics_error', error instanceof Error ? error.message : String(error))
     throw error
   }
 }
@@ -140,7 +140,7 @@ async function getSearchMetrics() {
       indexStats,
     }
   } catch (error) {
-    metrics.recordError('monitoring_search_metrics_error', error.message)
+    metrics.recordError('monitoring_search_metrics_error', error instanceof Error ? error.message : String(error))
     throw error
   }
 }
@@ -164,7 +164,7 @@ async function getAllMetrics() {
       search,
     }
   } catch (error) {
-    metrics.recordError('monitoring_all_metrics_error', error.message)
+    metrics.recordError('monitoring_all_metrics_error', error instanceof Error ? error.message : String(error))
     throw error
   }
 } 
