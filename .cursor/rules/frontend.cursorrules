@@ -1,0 +1,28 @@
+# JustMaily Frontend Cursor Rules
+
+## Core Vision Alignment
+- Build UI components that integrate seamlessly with autonomous AI agents for real-time, dynamic content updates.
+- Leverage AI-driven predictive user interactions and adaptive design techniques to enhance user experience.
+- Prioritize accessibility and AR readiness for advanced devices such as foldables and AR glasses.
+- Ensure a consistent design system that supports rapid scalability and dynamic theming across various platforms.
+
+## Next.js and React Guidelines
+- Build components using React functional components with TypeScript.
+- Prefer hooks for managing state and side effects.
+- Decompose UI components into smaller, reusable pieces to increase maintainability.
+- Follow Next.js best practices: use file-based routing, dynamic routes when needed, and optimize with Next.js built-in features (e.g., Image optimization, Link prefetching).
+- Avoid inline styles; use Tailwind CSS utility classes to ensure consistency and maintain a clean codebase.
+
+## Tailwind CSS Guidelines
+- Use Tailwind CSS classes to style components and enforce a consistent design system.
+- Leverage Tailwind's responsive design utilities for mobile-first development.
+- Customize Tailwind configuration (tailwind.config.js) to match the project's design requirements.
+- Ensure proper use of utility-first classes instead of writing custom CSS unless necessary.
+
+## General Frontend Recommendations
+- Ensure all UI components adhere to accessibility (a11y) standards.
+- Implement robust client-side error handling for asynchronous operations.
+- Write unit tests for critical components using React Testing Library and Vitest/Jest.
+- Monitor and optimize client-side performance, ensuring fast load times and smooth interactions.
+
+Keep these rules up-to-date as the project evolves to maintain high-quality, maintainable, and performant frontend code. 

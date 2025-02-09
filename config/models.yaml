@@ -1,0 +1,4 @@
+active_model: "deepseek-r1"
+fallback_models:
+  - "claude-3-5-sonnet"
+  - "llama-3-1-405b" 

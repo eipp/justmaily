@@ -1,0 +1,36 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: maily-web
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: maily-web
+  template:
+    metadata:
+      labels:
+        app: maily-web
+    spec:
+      containers:
+      - name: maily-web
+        image: <YOUR_ACR_REGISTRY_NAME>.azurecr.io/maily-web:latest # Replace with your ACR registry name and image
+        ports:
+        - containerPort: 3000
+        env:
+        # Define environment variables here, e.g., API endpoints, database connection strings, etc.
+        - name: NODE_ENV
+          value: "production"
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: maily-web-service
+spec:
+  selector:
+    app: maily-web
+  ports:
+  - protocol: TCP
+    port: 80
+    targetPort: 3000
+  type: LoadBalancer

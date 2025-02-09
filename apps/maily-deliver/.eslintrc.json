@@ -1,8 +1,0 @@
-{
-  "extends": [
-    "../../config/lint/.eslintrc.js"
-  ],
-  "parserOptions": {
-    "project": ["./tsconfig.json"]
-  }
-}

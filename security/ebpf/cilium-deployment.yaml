@@ -1,0 +1,35 @@
+apiVersion: apps/v1
+kind: DaemonSet
+metadata:
+  name: cilium
+  namespace: kube-system
+  labels:
+    k8s-app: cilium
+spec:
+  selector:
+    matchLabels:
+      k8s-app: cilium
+  template:
+    metadata:
+      labels:
+        k8s-app: cilium
+    spec:
+      hostNetwork: true
+      containers:
+      - name: cilium-agent
+        image: quay.io/cilium/cilium:v1.12.0
+        args:
+          - "--enable-ebpf-monitoring"
+          - "--config-dir=/etc/cilium"
+        securityContext:
+          privileged: true
+        ports:
+        - containerPort: 9090
+          name: metrics
+        env:
+        - name: CILIUM_MONITORING
+          value: "true"
+      tolerations:
+      - key: node-role.kubernetes.io/master
+        operator: Exists
+        effect: NoSchedule 

@@ -1,4 +1,17 @@
+NOTE: This document has been updated to reflect the new vision and strategic objectives of the Maily platform.
+
 # GDPR Compliance Checklist
+
+This document outlines our automation strategy and checklist for ensuring GDPR compliance. Our approach leverages OneTrust to automate data privacy measures and includes the following key components:
+
+- **OneTrust Integration:** Centralized management for data privacy and compliance.
+- **Automated PII Redaction:** Implementation of automated detection and redaction of Personally Identifiable Information (PII) in user communications and logs.
+- **Granular Consent Management:** Strict tracking and enforcement of user consent levels to ensure personalized privacy settings.
+- **Real-time Monitoring:** Alerts and monitoring mechanisms to detect and respond to privacy breaches.
+- **Regular Audits:** Scheduled reviews and audits to verify ongoing compliance with GDPR regulations.
+- **Documentation of Data Lifecycle:** Detailed recording of data flow, storage duration, and retention policies.
+
+These measures work together to ensure that our platform not only meets but exceeds GDPR requirements.
 
 ## Data Protection Measures
 

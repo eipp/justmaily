@@ -1,0 +1,11 @@
+# TLS configuration with advanced encryption measures prototype using CRYSTALS-Kyber
+
+tls:
+  version: "TLS1.3"
+  key_exchange: "hybrid-kyber"  # Prototype: Represents hybrid key exchange using CRYSTALS-Kyber
+  cipher_suites:
+    - "TLS_AES_128_GCM_SHA256_KYBER"
+    - "TLS_AES_256_GCM_SHA384_KYBER"
+  certificate_file: "/etc/ssl/certs/justmaily_cert.pem"
+  private_key_file: "/etc/ssl/private/justmaily_key.pem"
+  notes: "This configuration is a prototype integration of NIST-standard CRYSTALS-Kyber in the TLS handshake. Actual cipher suite names and integration details depend on library support and compliance testing." 

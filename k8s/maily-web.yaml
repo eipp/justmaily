@@ -1,0 +1,53 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: maily-web
+  namespace: production
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: maily-web
+  template:
+    metadata:
+      labels:
+        app: maily-web
+    spec:
+      containers:
+      - name: maily-web
+        image: justmaily/maily-web:latest
+        ports:
+        - containerPort: 3000
+        readinessProbe:
+          httpGet:
+            path: /health
+            port: 3000
+          initialDelaySeconds: 10
+          periodSeconds: 10
+        livenessProbe:
+          httpGet:
+            path: /health
+            port: 3000
+          initialDelaySeconds: 20
+          periodSeconds: 30
+        resources:
+          requests:
+            cpu: "200m"
+            memory: "256Mi"
+          limits:
+            cpu: "500m"
+            memory: "512Mi"
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: maily-web
+  namespace: production
+spec:
+  selector:
+    app: maily-web
+  ports:
+  - protocol: TCP
+    port: 3000
+    targetPort: 3000
+  type: ClusterIP 

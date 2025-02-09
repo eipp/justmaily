@@ -1,28 +1,57 @@
+<!--
+NOTE: This document has been updated to reflect the new vision and strategic objectives of the Maily platform.
+Please refer to docs/PROJECT_STRATEGY.md for full details.
+-->
+
 # Maily Documentation
 
-Maily is an AI-powered email marketing platform that helps businesses create, manage, and optimize their email campaigns using advanced AI capabilities.
+Welcome to the official Maily documentation portal, now completely aligned with our new vision of dynamic, self-healing email marketing powered by autonomous AI agents.
+
+## Overview
+
+Maily is an autonomous, self-healing, AI-first email marketing platform that empowers brands to deliver intelligently adaptive, ethically compliant, and hyper-personalized email campaigns. Leveraging advanced dynamic tool generation and decentralized agent orchestration, Maily continuously evolves to meet the demands of modern digital marketing.
+
+This documentation covers:
+- The updated core vision and strategic objectives
+- A detailed overview of our containerized, microservices-based system architecture
+- Comprehensive API, integration, and deployment guides
+- Security, compliance, and best practices for developers and operators
+
+## Getting Started
+
+To begin, explore the following sections:
+- **Project Strategy:** Detailed vision, objectives, and architectural principles in [PROJECT_STRATEGY.md](PROJECT_STRATEGY.md).
+- **Core Concepts:** Fundamental design and architectural elements that drive our platform, including autonomous agents and self-healing workflows.
+- **API Reference:** Guidelines for integrating with Maily's dynamic endpoints that support self-healing and dynamic integration generation.
+- **Deployment:** Instructions for continuous, resilient, zero-downtime deployments.
+- **Developer Guides:** Best practices and troubleshooting tips to get the most out of our platform.
+
+Happy exploring!
+
+## Documentation Structure
+
+This portal is organized to ensure easy access to all information needed to work with Maily:
+
+1. **Core Vision & Strategic Objectives:** Understand the mission and strategic pillars driving our innovations.
+2. **System Architecture:** In-depth details on our AI agents, data management, security, and compliance practices.
+3. **Development & Integration:** Start here for setup guides, API documentation, and developer tools.
+4. **Support, Testing & Future Roadmap:** Learn about our support tiers, testing strategies, and the long-term vision for Maily.
+
+For the most comprehensive view, please begin with the [PROJECT_STRATEGY.md](PROJECT_STRATEGY.md) document.
 
 ## Table of Contents
 
 1. [Getting Started](./guides/getting-started.md)
 2. [Core Concepts](./concepts/README.md)
-3. [Architecture Overview](./architecture/README.md)
-4. [API Reference](./api/README.md)
-5. [Guides](./guides/README.md)
-6. [Development](./development/README.md)
-7. [Deployment](./deployment/README.md)
-8. [Security](./security/README.md)
-
-## Overview
-
-Maily provides a comprehensive suite of tools and services for email marketing:
-
-- **AI-Powered Content Generation**: Create engaging email content using advanced language models
-- **Smart Audience Segmentation**: Target the right audience with AI-driven segmentation
-- **Intelligent Campaign Optimization**: Optimize campaigns using machine learning
-- **Real-time Analytics**: Track and analyze campaign performance
-- **Automated A/B Testing**: Test and improve email effectiveness
-- **Compliance Management**: Ensure regulatory compliance
+    - [Vision & Strategic Objectives](./Vision_and_Strategic_Objectives.md)
+    - [AI Agent Architecture](./concepts/ai-agent-architecture.md)
+    - [Data Architecture](./concepts/data-architecture.md)
+    - [UI/UX & Accessibility](./concepts/ui-ux-accessibility.md)
+3. [API Reference](./api/README.md)
+4. [Guides](./guides/README.md)
+5. [Development](./development/README.md)
+6. [Deployment](./deployment/README.md)
+7. [Security](./security/README.md)
 
 ## Core Features
 
@@ -56,18 +85,20 @@ Maily provides a comprehensive suite of tools and services for email marketing:
 
 ## System Architecture
 
-Maily is built on a modern, scalable architecture:
+Maily is built on a modern, scalable architecture designed for AI-driven email marketing:
 
-- Microservices-based design
-- Event-driven communication
-- Multi-provider AI integration
-- Real-time data processing
-- High-availability infrastructure
+- **Autonomous Agent Orchestration**: Utilizes CrewAI 2.0 and Autogen Studio to coordinate specialized AI agents.
+- **Model Agnostic LLM Infrastructure**: Based on DeepSeek R1, swappable with other models via Fireworks.ai, deployed on Azure AI.
+- **Zero-Party Data Hub**: Employs Snowflake Cortex and Decodable for real-time collection and processing of user preferences.
+- **Behavioral Data Lake**: Stores interaction data in Apache Iceberg and Delta Lake for AI agent training.
+- **Real-Time Data Streaming**: Uses Redpanda and Materialize for sub-second latency data delivery to AI agents.
+- **Privacy & Compliance Engine**: Integrates OneTrust and Immuta for automated GDPR/CCPA compliance and PII redaction.
+- **Accessible UI/UX**:  Built with Next.js 15, Radix UI, and Tailwind CSS, ensuring WCAG 2.2 AA compliance and optimized for modern devices.
 
 ## Getting Started
 
 1. [Installation Guide](./guides/installation.md)
-2. [Quick Start Tutorial](./guides/quickstart.md)
+2. [Quick Start Tutorial](./guides/quick-start.md)
 3. [Configuration Guide](./guides/configuration.md)
 4. [API Documentation](./api/README.md)
 
@@ -98,86 +129,28 @@ Maily is built on a modern, scalable architecture:
 - [FAQ](./guides/faq.md)
 - [Community Resources](./community/README.md)
 
+## Dependency Management
+
+This repository uses **pnpm** as its sole package manager.
+
+To set up the project:
+1. Install pnpm globally if not already installed:
+   ```
+   npm install -g pnpm
+   ```
+2. Install dependencies:
+   ```
+   pnpm install
+   ```
+3. To run linting, tests, and security audits, use:
+   ```
+   pnpm run lint
+   pnpm run test
+   pnpm audit
+   ```
+
+Please ensure that you use pnpm for all dependency management tasks.
+
 ## License
 
 This project is proprietary software. All rights reserved.
-
-# Deployment Instructions
-
-This project uses a production-grade CI/CD pipeline along with containerization and automated deployment scripts.
-
-## Automated Deployment
-
-A deployment script is provided in `infrastructure/scripts/deploy.sh`. It performs the following tasks:
-  - Database backup using `pg_dump`
-  - Running database migrations (e.g., via `npm run migrate`)
-  - Building and deploying the Docker container using `docker-compose`
-
-### How to Deploy
-
-Run the following command to start deployment:
-
-```bash
-./infrastructure/scripts/deploy.sh deploy
-```
-
-For rollback, run:
-
-```bash
-./infrastructure/scripts/deploy.sh rollback
-```
-
-## Containerization & Orchestration
-
-The application is containerized using a `Dockerfile` and orchestrated with Docker Compose. Key files include:
-  - `Dockerfile`: Builds your production-ready image.
-  - `docker-compose.yaml`: Defines service orchestration for the web app and its dependencies (e.g., Postgres).
-
-## Environment Variables & Security
-
-Ensure that sensitive environment variables (such as database credentials) are managed securely. Use environment files or secret management services as needed. Refer to `apps/maily-analyze/env-vars.js` as an example of how to separate configuration from code.
-
-# Troubleshooting
-
-## Common Issues
-
-- **Build Failures:**  
-  Ensure your Node.js version matches the version specified in the workflow and Dockerfile.
-
-- **Deployment Failures:**  
-  Check logs from the deployment script (`infrastructure/scripts/deploy.sh`). Make sure environment variables such as `DB_USER`, `DB_HOST`, and `DB_NAME` are set correctly.
-
-- **Container Issues:**  
-  View container logs using `docker-compose logs` for services like `web` or `db`.
-
-# Architecture Overview
-
-The application follows a microservice-inspired structure with the following components:
-  - **Web Service:**  
-    Runs on Node.js and handles requests. Containerized using Docker.
-  - **Database:**  
-    A PostgreSQL service coordinated via Docker Compose.
-  - **CI/CD Pipeline:**  
-    Uses GitHub Actions to automate testing, security audits, performance checks, and deployments.
-
-# Operational Runbooks
-
-## Regular Maintenance Tasks
-
-- **Database Backups:**  
-  Automated daily backups are performed during deployment. Verify backups are stored securely.
-
-- **System Health Checks:**  
-  Periodically run load tests and performance audits to ensure system integrity.
-
-## Performance Tuning & Incident Response
-
-- **Performance Tuning:**  
-  Monitor key metrics using integrated tools like Lighthouse CI, Artillery, and external monitoring services.
-
-- **Incident Response:**  
-  In case of performance degradation or service outages, consult the logs, initiate the rollback process if needed, and review recent deployment changes.
-
-# Additional Information
-
-For more detailed information on deployment strategies and operational guidelines, refer to the internal developer handbook or contact the DevOps team. 

@@ -1,0 +1,48 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: maily-deepseek-r1
+  labels:
+    app: maily
+    component: deepseek
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: maily
+      component: deepseek
+  template:
+    metadata:
+      labels:
+        app: maily
+        component: deepseek
+    spec:
+      containers:
+      - name: deepseek-r1
+        image: <azure-ai-deepseek-r1-image>
+        resources:
+          limits:
+            nvidia.com/gpu: 1
+        env:
+        - name: ACTIVE_MODEL
+          valueFrom:
+            configMapKeyRef:
+              name: maily-config
+              key: active_model
+        ports:
+        - containerPort: 8080
+      nodeSelector:
+        gpu: "true"
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: maily-deepseek-service
+spec:
+  selector:
+    app: maily
+    component: deepseek
+  ports:
+  - protocol: TCP
+    port: 80
+    targetPort: 8080 

@@ -1,4 +1,17 @@
+NOTE: This document has been updated to reflect the new vision and strategic objectives of the Maily platform.
+
 # CCPA Compliance Checklist
+
+This document outlines our automation strategy and checklist for ensuring CCPA compliance. Our approach leverages OneTrust to automate data privacy measures tailored for California residents and includes the following key components:
+
+- **OneTrust Integration:** Centralized management for data privacy and compliance aligned with CCPA requirements.
+- **Automated PII Redaction:** Implementation of automated detection and redaction of Personally Identifiable Information (PII) in user communications and logs.
+- **Consumer Rights Management:** Efficient tracking and enforcement of consumer rights, including access, deletion, and opt-out requests.
+- **Real-time Monitoring:** Alerts and monitoring mechanisms to detect and respond to privacy breaches or non-compliant data processing.
+- **Regular Audits:** Scheduled reviews and audits to verify ongoing compliance with CCPA regulations and address any gaps.
+- **Documentation of Data Lifecycle:** Detailed recording of data flow, storage duration, and retention policies specific to CCPA.
+
+These measures work together to ensure that our platform meets the stringent requirements of the CCPA while maintaining transparency and trust with our users.
 
 ## Consumer Rights Implementation
 

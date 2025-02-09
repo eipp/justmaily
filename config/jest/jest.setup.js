@@ -40,4 +40,4 @@ process.env = {
   MONGODB_URI: 'mongodb://localhost:27017/maily-test',
   ACCESS_TOKEN_SECRET: 'test-access-secret',
   REFRESH_TOKEN_SECRET: 'test-refresh-secret',
-}; 
+};

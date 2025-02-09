@@ -40,8 +40,8 @@ export const options = {
   },
   thresholds: {
     http_req_duration: ['p(95)<1000'], // 95% of requests should complete within 1s
-    error_rate: ['rate<0.1'],          // Error rate should be below 10%
-    cache_hit_rate: ['rate>0.3'],      // Cache hit rate should be above 30%
+    error_rate: ['rate<0.1'], // Error rate should be below 10%
+    cache_hit_rate: ['rate>0.3'], // Cache hit rate should be above 30%
   },
 };
 
@@ -72,7 +72,7 @@ function checkResponse(response) {
     'response has data': (r) => r.json('data') !== undefined,
   });
   errorRate.add(!success);
-  
+
   if (response.headers['X-Cache-Hit']) {
     cacheHitRate.add(1);
   } else {
@@ -95,9 +95,13 @@ export function generateEmail() {
     },
   });
 
-  const response = http.post('http://api.example.com/v1/generate/email', payload, {
-    headers: { 'Content-Type': 'application/json' },
-  });
+  const response = http.post(
+    'http://api.example.com/v1/generate/email',
+    payload,
+    {
+      headers: { 'Content-Type': 'application/json' },
+    },
+  );
 
   checkResponse(response);
   sleep(1);
@@ -112,9 +116,13 @@ export function generateSubjectLines() {
     },
   });
 
-  const response = http.post('http://api.example.com/v1/generate/subjects', payload, {
-    headers: { 'Content-Type': 'application/json' },
-  });
+  const response = http.post(
+    'http://api.example.com/v1/generate/subjects',
+    payload,
+    {
+      headers: { 'Content-Type': 'application/json' },
+    },
+  );
 
   checkResponse(response);
   sleep(0.5);
@@ -124,8 +132,8 @@ export function generateSubjectLines() {
 export default function () {
   const rand = Math.random();
   if (rand < 0.7) {
-    generateEmail();      // 70% of requests
+    generateEmail(); // 70% of requests
   } else {
     generateSubjectLines(); // 30% of requests
   }
-} 
+}

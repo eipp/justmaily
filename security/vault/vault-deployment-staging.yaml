@@ -1,0 +1,42 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: vault-staging
+  labels:
+    app: vault
+    environment: staging
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: vault
+      environment: staging
+  template:
+    metadata:
+      labels:
+        app: vault
+        environment: staging
+    spec:
+      containers:
+      - name: vault
+        image: vault:1.10.0
+        ports:
+        - containerPort: 8200
+        env:
+        - name: VAULT_STAGING_ROOT_TOKEN_ID
+          value: "staging-root-token"
+        - name: VAULT_LOCAL_CONFIG
+          value: |
+            listener "tcp" {
+              address = "0.0.0.0:8200"
+              tls_disable = 1
+            }
+            storage "raft" {
+              path = "/vault/data"
+              node_id = "vault-staging"
+            }
+            disable_mlock = true
+            seal "shamir" {
+              recovery_shares = 5
+              recovery_threshold = 3
+            } 

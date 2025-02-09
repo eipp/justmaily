@@ -1,0 +1,39 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: vault-dev
+  labels:
+    app: vault
+    environment: dev
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: vault
+      environment: dev
+  template:
+    metadata:
+      labels:
+        app: vault
+        environment: dev
+    spec:
+      containers:
+      - name: vault
+        image: vault:1.10.0
+        ports:
+        - containerPort: 8200
+        env:
+        - name: VAULT_DEV_ROOT_TOKEN_ID
+          value: "dev-root-token"
+        - name: VAULT_LOCAL_CONFIG
+          value: |
+            listener "tcp" {
+              address = "0.0.0.0:8200"
+              tls_disable = 1
+            }
+            storage "inmem" {}
+            disable_mlock = true
+            seal "shamir" {
+              recovery_shares = 5
+              recovery_threshold = 3
+            } 

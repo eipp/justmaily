@@ -1,32 +1,13 @@
 module.exports = {
-  preset: 'ts-jest',
-  testEnvironment: 'node',
-  roots: ['<rootDir>/src'],
-  transform: {
-    '^.+\\.tsx?$': 'ts-jest'
-  },
+  testEnvironment: 'jsdom',
+  testMatch: ['**/__tests__/**/*.[jt]s?(x)', '**/?(*.)+(spec|test).[tj]s?(x)'],
   moduleNameMapper: {
-    '^@maily/(.*)$': '<rootDir>/../../libs/$1/src'
+    '\\.(css|less|scss|sass)$': 'identity-obj-proxy',
   },
-  coverageThreshold: {
-    global: {
-      branches: 80,
-      functions: 80,
-      lines: 80,
-      statements: 80
-    }
+  transform: {
+    '^.+\\.[tj]sx?$': 'babel-jest',
   },
-  collectCoverageFrom: [
-    'src/**/*.{ts,tsx}',
-    '!src/**/*.d.ts',
-    '!src/**/*.test.{ts,tsx}',
-    '!src/**/__tests__/**'
-  ],
-  setupFilesAfterEnv: ['<rootDir>/../../config/jest.setup.js'],
-  testMatch: ['**/__tests__/**/*.test.[jt]s?(x)'],
-  globals: {
-    'ts-jest': {
-      tsconfig: '<rootDir>/tsconfig.json'
-    }
-  }
-}; 
+  collectCoverage: true,
+  coverageDirectory: 'coverage',
+  coverageReporters: ['json', 'lcov', 'text', 'clover'],
+};

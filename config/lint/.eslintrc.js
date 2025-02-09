@@ -46,10 +46,7 @@ module.exports = {
   overrides: [
     {
       files: ['apps/web-client/**/*.{ts,tsx}'],
-      extends: [
-        'plugin:react/recommended',
-        'plugin:react-hooks/recommended'
-      ],
+      extends: ['plugin:react/recommended', 'plugin:react-hooks/recommended'],
       plugins: ['react', 'react-hooks'],
       rules: {
         'react/react-in-jsx-scope': 'off',
@@ -71,4 +68,4 @@ module.exports = {
       plugins: ['jest']
     }
   ]
-}; 
+};

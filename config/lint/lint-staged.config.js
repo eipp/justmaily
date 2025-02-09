@@ -4,15 +4,11 @@ module.exports = {
     'eslint --fix',
     'prettier --write',
     () => 'tsc -p tsconfig.json --noEmit',
-    'jest --bail --findRelatedTests',
+    'jest --bail --findRelatedTests'
   ],
 
   // JavaScript files
-  '**/*.js?(x)': [
-    'eslint --fix',
-    'prettier --write',
-    'jest --bail --findRelatedTests',
-  ],
+  '**/*.js?(x)': ['eslint --fix', 'prettier --write', 'jest --bail --findRelatedTests'],
 
   // JSON files
   '**/*.json': ['prettier --write'],
@@ -24,5 +20,5 @@ module.exports = {
   '**/*.sh': ['shellcheck'],
 
   // Environment files
-  '**/*.env.*': ['secretlint'],
-}; 
+  '**/*.env.*': ['secretlint']
+};

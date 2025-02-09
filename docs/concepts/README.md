@@ -1,6 +1,19 @@
+<!--
+NOTE: This document has been updated to reflect the new vision and strategic objectives of the Maily platform.
+Please refer to docs/PROJECT_STRATEGY.md for full details.
+-->
+
 # Core Concepts
 
-This guide explains the fundamental concepts and architecture of Maily.
+This guide explains the fundamental concepts and architecture of Maily, our autonomous, self-healing, and ethically driven email marketing platform. At its core, Maily leverages:
+
+- **Autonomous AI Agents:** Intelligent agents that continuously learn, optimize, debug, and even generate missing integrations on the fly.
+- **Self-Healing Workflows:** Dynamic detection and automated remediation processes to ensure uninterrupted campaign performance.
+- **Dynamic Tool Generation:** On-demand generation of tools and integrations to adapt to evolving business needs.
+- **Ethical AI & Compliance:** Robust guardrails and industry-leading standards to ensure privacy, security, and regulatory adherence.
+- **Scalable Microservices Architecture:** Containerized and decoupled services that enable agile, resilient, and future-proof operations.
+
+These principles combine to form a platform that not only meets the current demands of digital marketing but is also designed to evolve and self-optimize in real time.
 
 ## System Architecture
 

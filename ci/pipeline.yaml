@@ -1,0 +1,16 @@
+# CI/CD Pipeline for justmaily
+
+stages:
+  - deploy
+
+deploy_temporal:
+  stage: deploy
+  script:
+    - echo "Deploying Temporal server..."
+    - kubectl apply -f ../k8s/temporal.yaml | cat
+
+deploy_maily_web:
+  stage: deploy
+  script:
+    - echo "Deploying maily-web application..."
+    - kubectl apply -f ../k8s/maily-web.yaml | cat 

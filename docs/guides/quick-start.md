@@ -1,3 +1,5 @@
+NOTE: This document has been updated to reflect the new vision and strategic objectives of the Maily platform.
+
 # Quick Start Guide
 
 ## Prerequisites

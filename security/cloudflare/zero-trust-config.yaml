@@ -1,0 +1,20 @@
+apiVersion: cloudflare.com/v1
+kind: ZeroTrustConfig
+metadata:
+  name: justmaily-zero-trust
+  namespace: justmaily
+spec:
+  tunnel: "justmaily-tunnel"
+  ingress:
+    - hostname: "app.justmaily.com"
+      service: "https://justmaily-internal.svc.cluster.local:443"
+    - service: "http_status:404"
+  policies:
+    - name: "Allow Marketing Team"
+      action: "allow"
+      identities:
+        - "user:marketing@justmaily.com"
+    - name: "Deny All Others"
+      action: "deny"
+      identities: []
+  notes: "This configuration is a prototype for integrating Cloudflare Zero Trust into the justmaily networking setup. Adjust the tunnel, hostname, and identities as needed for production use." 

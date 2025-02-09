@@ -1,0 +1,25 @@
+# JustMaily Backend Cursor Rules
+
+## Core Vision Alignment
+- Architect systems to support Maily's AI-first paradigm: empower autonomous AI agents, self-healing workflows, and dynamic tool creation.
+- Ensure backend infrastructure adheres to self-hosted, zero-trust, and quantum-safe security practices (e.g., TLS 1.3 with NIST CRYSTALS-Kyber, AES-256 encryption, Hashicorp Vault with Shamir Secret Sharing).
+- Maintain compliance with GDPR/CCPA through automated compliance workflows and blockchain-based audit trails (e.g., consent NFTs on Polygon).
+
+## API Guidelines (Next.js Endpoints)
+- Use modern ES modules and TypeScript for all API endpoints.
+- Extract request validation, business logic, and error handling into separate helper functions, enabling dynamic tool generation via GPT-Engineer when needed.
+- Standardize error responses with consistent HTTP status codes and centralized error messaging; integrate AI-driven performance monitoring.
+- Follow design patterns that support orchestration and scalability (e.g., modular endpoints for attachments, ai, campaigns, contacts).
+
+## Legacy Python Modules
+- Modularize legacy Python code (app.py, orchestrator.py, self_healing.py) to align with modern design principles and self-healing practices.
+- Where applicable, adopt FastAPI best practices:
+  - Use Pydantic for data validation.
+  - Structure code with dependency injection to improve modularity.
+  - Implement consistent error handling and logging, with provisions for automated remediation via GPT-Engineer prompts.
+- Gradually refactor and decouple legacy components to improve maintainability and support autonomous recovery.
+
+## General Recommendations for Backend
+- Enforce secure handling of inputs and errors with zero-trust principles.
+- Profile and optimize performance-critical segments; integrate AI-enabled dynamic scaling and error detection.
+- Write comprehensive tests (unit, integration, and chaos engineering scenarios) using pytest for Python and Vitest/Jest for TypeScript. 

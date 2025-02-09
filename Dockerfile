@@ -1,10 +1,18 @@
 # Use an official Node.js runtime as the base image
-FROM node:16-alpine
+FROM node:20-alpine
 
 # Set the working directory inside the container
 WORKDIR /usr/src/app
 
-# Copy package files and install dependencies (use caching)
+# Install Python 3 and pip
+RUN apk add --no-cache python3 py3-pip
+
+# Install Python dependencies (AI agent related libraries)
+# Example dependencies - refine this list based on actual requirements
+COPY requirements.txt ./
+RUN pip install --no-cache-dir -r requirements.txt
+
+# Copy package files and install Node.js dependencies (use caching)
 COPY package*.json ./
 RUN npm install --production
 
@@ -21,4 +29,4 @@ EXPOSE 3000
 ENV NODE_ENV production
 
 # Start the application
-CMD ["npm", "start"] 
+CMD ["npm", "start"]

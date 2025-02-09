@@ -1,53 +1,63 @@
-# Getting Started
+NOTE: This document has been updated to reflect the new vision and strategic objectives of the Maily platform.
 
-Welcome to Maily! This guide will walk you through the process of setting up the project on your local machine.
+# Getting Started with Maily
+
+Welcome to Maily! This guide will help you set up your development environment and contribute effectively to the project.
 
 ## Prerequisites
 
-- [Node.js](https://nodejs.org/) (version 16 or later)
-- [Git](https://git-scm.com/)
-- [Docker](https://www.docker.com/) and [Docker Compose](https://docs.docker.com/compose/) if you plan to run the containerized version
+- Node.js and npm for frontend development.
+- Go for backend development.
+- Git for version control.
 
 ## Installation
 
-1. **Clone the Repository**
-
+1. Clone the repository:
    ```bash
-   git clone https://github.com/yourusername/maily.git
-   cd maily
+git clone <repo-url>
+   ```
+2. Install frontend dependencies:
+   ```bash
+cd frontend && npm install
+   ```
+3. For backend services:
+   ```bash
+cd backend && go mod download
    ```
 
-2. **Install Dependencies**
+## Development Workflow
 
+### Code Style and Quality
+
+- Our project enforces consistent code style using ESLint and Prettier. 
+- Please refer to our [CODE_STYLE guidelines](../CODE_STYLE.md).
+
+### Testing
+
+- **Frontend:** We use Jest for unit and integration tests. Run tests using:
    ```bash
-   npm install
-   ```
-
-3. **Configuration**
-
-   - Create a local configuration file for environment variables (refer to `apps/maily-analyze/env-vars.js` for structure).
-   - Set up your database credentials and other secrets in the file (or use your preferred local secrets management tool).
-
-4. **Run the Application Locally**
-
-   ```bash
-   npm start
-   ```
-
-   Open [http://localhost:3000](http://localhost:3000) in your browser to verify the app is running.
-
-## Running Tests and Linters
-
-Before submitting any code changes, run the following commands:
-
-```bash
-npm run lint
 npm test
-```
+   ```
+- **Backend:** We use Go Test for running tests. Run tests using:
+   ```bash
+go test ./...
+   ```
 
-## Next Steps
+### Running the Application
 
-- Check out the [Development Guide](../development/README.md) for more details on setting up your development environment and contributing.
-- Read the [API Reference](../api/README.md) for more details on API endpoints and integrations.
+- For frontend development:
+   ```bash
+npm start
+   ```
+- For backend services:
+   ```bash
+go run main.go
+   ```
+
+## Further Documentation
+
+- **Concepts:** Learn more from the [Maily Conceptual Overview](../concepts/maily.md).
+- **API:** Check out our [OpenAPI Specifications](../api/openapi-specifications.md) for API endpoint details.
+- **Developer Guide:** Detailed development practices are documented in [Development Guide](../development/README.md).
 
 Happy Coding! 

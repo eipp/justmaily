@@ -1,0 +1,44 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: vault-prod
+  labels:
+    app: vault
+    environment: prod
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: vault
+      environment: prod
+  template:
+    metadata:
+      labels:
+        app: vault
+        environment: prod
+    spec:
+      containers:
+      - name: vault
+        image: vault:1.10.0
+        ports:
+        - containerPort: 8200
+        env:
+        - name: VAULT_PROD_ROOT_TOKEN_ID
+          value: "prod-root-token"
+        - name: VAULT_LOCAL_CONFIG
+          value: |
+            listener "tcp" {
+              address = "0.0.0.0:8200"
+              tls_disable = 0
+              tls_cert_file = "/vault/config/cert.pem"
+              tls_key_file = "/vault/config/key.pem"
+            }
+            storage "raft" {
+              path = "/vault/data"
+              node_id = "vault-prod"
+            }
+            disable_mlock = true
+            seal "shamir" {
+              recovery_shares = 5
+              recovery_threshold = 3
+            } 

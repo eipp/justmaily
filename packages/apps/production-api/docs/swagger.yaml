@@ -1,0 +1,137 @@
+openapi: 3.0.0
+info:
+  title: Production API
+  version: "1.0.0"
+  description: Production-grade API for an AI-powered support system and bug bounty program.
+servers:
+  - url: http://localhost:3000
+paths:
+  /support/query:
+    post:
+      summary: Submit a support query
+      description: Submits a query to the AI-powered support system. Returns a simulated response and escalates if necessary.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                query:
+                  type: string
+              required:
+                - query
+      responses:
+        "200":
+          description: Successful response with chatbot answer and possible escalation info.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: string
+                  escalation:
+                    type: string
+        "400":
+          description: Missing query parameter.
+        "500":
+          description: Internal Server Error
+  /bug-bounty/submit:
+    post:
+      summary: Submit a bug bounty report
+      description: Submits a bug bounty report with details about the bug.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                title:
+                  type: string
+                description:
+                  type: string
+                severity:
+                  type: string
+                  enum: [low, medium, high, critical]
+                reporterEmail:
+                  type: string
+              required:
+                - title
+                - description
+                - severity
+                - reporterEmail
+      responses:
+        "201":
+          description: Bug bounty report submitted successfully.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: object
+                    properties:
+                      reportId:
+                        type: string
+                      title:
+                        type: string
+                      description:
+                        type: string
+                      severity:
+                        type: string
+                      reporterEmail:
+                        type: string
+                      submittedAt:
+                        type: string
+                        format: date-time
+        "400":
+          description: Missing or invalid fields.
+        "500":
+          description: Internal Server Error
+  /bug-bounty/guidelines:
+    get:
+      summary: Retrieve bug bounty program guidelines
+      description: Retrieves all guidelines and rules for the bug bounty program.
+      responses:
+        "200":
+          description: Guidelines retrieved successfully.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: object
+                    properties:
+                      scope:
+                        type: string
+                      rules:
+                        type: string
+                      safeHarbor:
+                        type: string
+                      reward:
+                        type: string
+                      submissionProcess:
+                        type: string
+        "500":
+          description: Internal Server Error
+  /bug-bounty/reports:
+    get:
+      summary: List all bug bounty reports
+      description: Retrieves all submitted bug bounty reports (admin endpoint, authentication required in production).
+      responses:
+        "200":
+          description: Bug bounty reports retrieved successfully.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      type: object
+        "500":
+          description: Internal Server Error 

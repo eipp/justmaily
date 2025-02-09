@@ -1,0 +1,22 @@
+# JustMaily General Cursor Rules
+
+## Core Vision Alignment
+- Build and maintain a codebase that supports an AI-first paradigm with autonomous AI agents, self-healing routines, and dynamic tool generation.
+- Integrate zero-trust security practices and quantum-safe encryption methods (e.g., TLS 1.3 with NIST CRYSTALS-Kyber, AES-256 encryption).
+- Ensure compliance automation (e.g., GDPR/CCPA via OneTrust) and robust error handling with adaptive performance monitoring.
+- Standardize configurations and testing to support rapid scaling and autonomous recovery.
+
+## General Guidelines
+- **ES Modules & TypeScript:** Use modern ES modules; follow strict TypeScript best practices with regular type-safety.
+- **DRY and SOLID Principles:** Write modular, reusable code with clear separation of concerns.
+- **Error Handling & Validation:** Always separate request validation, business logic, and error handling in all layers of the project.
+- **Centralized Configuration:** Maintain unified configuration files (ESLint, Prettier, TSConfig) at the repository root for consistency.
+- **Dependency Management:** Use pnpm exclusively; remove redundant lock files and centralize dependencies.
+
+## Testing & CI/CD
+- Develop comprehensive unit, integration, and end-to-end tests using Vitest/Jest for TypeScript and pytest for Python.
+- Integrate continuous integration pipelines that run static analysis, linting, and automated tests on each commit.
+
+## Security & Performance
+- **Input Validation:** Rigorously validate all inputs to avoid security vulnerabilities.
+- **Performance Optimizations:** Continuously profile critical paths and refactor inefficient code. 

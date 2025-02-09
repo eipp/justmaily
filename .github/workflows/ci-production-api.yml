@@ -1,0 +1,29 @@
+name: Production API CI Pipeline
+
+on:
+  push:
+    paths:
+      - 'production-api/**'
+  pull_request:
+    paths:
+      - 'production-api/**'
+
+jobs:
+  build-test:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: production-api
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v3
+      - name: Use Node.js 16.x
+        uses: actions/setup-node@v3
+        with:
+          node-version: '16'
+      - name: Install Dependencies
+        run: npm install
+      - name: Lint Code
+        run: npm run lint
+      - name: Run Tests
+        run: npm test 

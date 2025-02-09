@@ -1,1 +1,0 @@
-import { Tabs } from '@/components/ui/tabs'; 

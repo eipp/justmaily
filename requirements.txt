@@ -1,0 +1,9 @@
+crewai
+autogen
+zep-python
+gpt-engineer
+fireworks-ai
+anthropic
+llama-cpp-python
+pyspark
+requests
